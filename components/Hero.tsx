@@ -31,10 +31,44 @@ export function Hero() {
 
   return (
     <section ref={ref} id="top" className="relative overflow-hidden pt-24 pb-12 sm:pt-28">
-      {/* Accounting photo + theme-reactive overlay */}
+      {/* LIGHT hero backdrop: designed bright scene, no photo */}
+      <div aria-hidden className="absolute inset-0 dark:hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-cream to-cream-dark/60" />
+        {/* fine dot grid for texture */}
+        <div className="absolute inset-0 opacity-60 [background-image:radial-gradient(var(--line)_1px,transparent_1px)] [background-size:26px_26px] [mask-image:radial-gradient(ellipse_75%_75%_at_50%_30%,black_30%,transparent_100%)]" />
+      </div>
+      <motion.div
+        aria-hidden
+        style={reduce ? undefined : { y: yBg }}
+        className="pointer-events-none absolute inset-0 dark:hidden"
+      >
+        {/* bright gold + teal glows */}
+        <div className="absolute -top-44 right-[-8%] h-[540px] w-[540px] rounded-full bg-gold/25 blur-3xl" />
+        <div className="absolute top-40 right-[24%] h-[320px] w-[320px] rounded-full bg-teal/20 blur-3xl" />
+        <div className="absolute bottom-[-30%] left-[-10%] h-[460px] w-[460px] rounded-full bg-teal/10 blur-3xl" />
+        {/* brand dial rings behind the cards */}
+        <svg
+          viewBox="0 0 200 200"
+          fill="none"
+          className="absolute -right-24 top-10 h-[520px] w-[520px] text-ink/[0.06]"
+        >
+          <circle cx="100" cy="100" r="96" stroke="currentColor" strokeDasharray="2 5" />
+          <circle cx="100" cy="100" r="72" stroke="currentColor" />
+          <circle cx="100" cy="100" r="48" stroke="currentColor" strokeDasharray="1 4" />
+        </svg>
+        <svg
+          viewBox="0 0 200 200"
+          fill="none"
+          className="animate-spin-slow absolute -right-24 top-10 h-[520px] w-[520px] text-gold/25"
+        >
+          <circle cx="100" cy="100" r="84" stroke="currentColor" strokeDasharray="1 10" />
+        </svg>
+      </motion.div>
+
+      {/* DARK hero backdrop: accounting photo under the deep teal treatment */}
       <motion.div
         style={reduce ? undefined : { y: yBg }}
-        className="absolute inset-x-0 -inset-y-[8%]"
+        className="absolute inset-x-0 -inset-y-[8%] hidden dark:block"
       >
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/hero-bg.jpg`}
@@ -44,13 +78,13 @@ export function Hero() {
           sizes="100vw"
           className="object-cover object-[30%_55%]"
         />
-        <div className="absolute inset-0 bg-(--hero-overlay) transition-colors duration-500" />
-        {/* Left scrim keeps the headline readable in both themes */}
-        <div className="absolute inset-0 bg-gradient-to-r from-(--hero-scrim) via-(--hero-scrim-mid) to-transparent transition-colors duration-500" />
+        <div className="absolute inset-0 bg-(--hero-overlay)" />
+        {/* Left scrim keeps the headline readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-(--hero-scrim) via-(--hero-scrim-mid) to-transparent" />
       </motion.div>
 
-      {/* Gold + teal glows */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
+      {/* Gold + teal glows (dark mode) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 hidden dark:block">
         <div className="absolute -top-40 right-[-12%] h-[480px] w-[480px] rounded-full bg-gold/15 blur-3xl" />
         <div className="absolute bottom-[-25%] left-[-12%] h-[420px] w-[420px] rounded-full bg-teal/15 blur-3xl" />
       </div>
@@ -141,6 +175,24 @@ export function Hero() {
           <HeroIllustration />
         </motion.div>
       </motion.div>
+
+      {/* Scroll cue */}
+      <motion.a
+        href="#about"
+        aria-label="Scroll to the About section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.8 }}
+        className="absolute bottom-4 left-1/2 hidden -translate-x-1/2 lg:block"
+      >
+        <motion.span
+          animate={reduce ? undefined : { y: [0, 6, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="flex h-10 w-6 items-start justify-center rounded-full border border-ink/25 pt-1.5"
+        >
+          <span className="h-2 w-1 rounded-full bg-gold" />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }

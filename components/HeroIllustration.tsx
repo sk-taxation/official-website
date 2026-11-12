@@ -8,7 +8,7 @@ const EASE = [0.22, 1, 0.36, 1] as const;
    faint white film in dark mode, so the cards read correctly over both hero
    treatments; text and accents come from theme tokens. */
 const CARD =
-  "rounded-2xl border border-line bg-(--hero-glass) shadow-2xl shadow-black/15 backdrop-blur-xl transition-colors duration-500";
+  "rounded-2xl border border-line bg-(--hero-glass) shadow-[0_28px_60px_-28px_rgba(4,38,32,0.35)] backdrop-blur-xl transition-colors duration-500";
 
 /**
  * Glass dashboard composition for the hero: a deliberate, aligned grid

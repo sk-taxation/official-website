@@ -1,5 +1,21 @@
 # Progress Log — SK Taxation Landing Page
 
+## 2026-11-12 09:28
+
+**Light hero redesigned: fully light first screen (client request).**
+
+- The light theme no longer dims the accounting photo behind a mint wash; the photo now
+  appears only in dark mode (`hidden dark:block`). Light mode gets a designed bright
+  backdrop: white-to-mint gradient, masked fine dot grid, warm gold + teal glows with
+  parallax, and concentric brand "dial" rings (one slowly rotating) behind the dashboard
+  cards.
+- Glass cards brightened for light mode (`--hero-glass` 0.88 white) with a soft teal-tinted
+  shadow, so they read as crisp white cards on the bright scene.
+- Added a subtle scroll cue (animated pill, links to #about) at the hero's bottom edge on
+  large screens; respects reduced motion.
+- Verified on the built export: light hero is fully bright with no photo, dark mode keeps
+  the photo treatment (visibility + token checks), lint and build clean.
+
 ## 2026-10-21 15:37
 
 **Real contact email wired in.**
